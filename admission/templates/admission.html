@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Predict Admission Chances</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        function predict_chances() {
+           url = "http://localhost:8000/predict?gre=" + $("#gre_score").val() +
+                 "&toefl=" + $("#toefl_score").val() +
+                 "&cgpa=" + $("#cgpa").val();
+
+           // Make AJAX request
+           $.get(url,
+                 null,
+                 function(result) {
+                    $("#chances").text(result);
+                 }
+           );
+        }
+    </script>
+</head>
+<body>
+
+<h1>Predict Admission Chances</h1>
+GRE Score <br/>
+<input type="number" id="gre_score"/>
+<p></p>
+
+TOEFL Score <br/>
+<input type="number" id="toefl_score"/>
+<p></p>
+
+CGPA <br/>
+<input type="number" id="cgpa"/>
+<p></p>
+<button onclick="predict_chances()">Predict Chances</button>
+
+<h2 id="chances"></h2>
+</body>
+</html>
